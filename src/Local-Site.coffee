@@ -15,8 +15,8 @@ class Local_Site
   express_Setup: =>
     @.app = new express()
     @.app.use express.static @.leanpub_Api.folder_content
-    @.app.use '/css', express.static @.leanpub_Api.folder_repo + '/editor-ui/bower_components/bootstrap/dist/css'
-    @.app.set 'views', @.leanpub_Api.folder_repo + '/editor-ui/views'
+    @.app.use '/css', express.static @.leanpub_Api.folder_repo + '/leanpub-book-site/bower_components/bootstrap/dist/css'
+    @.app.set 'views', @.leanpub_Api.folder_repo + '/leanpub-book-site/views'
     @.app.set 'view engine', 'jade'
     @.map_Routes()
 
@@ -31,10 +31,11 @@ class Local_Site
           if file.file_Extension() and ['.jpg', '.png', '.DS_Store'].not_Contains file.file_Extension()
             file.remove(@.leanpub_Api.folder_content.real_Path())
 
-      if file_Name.file_Extension() is '.txt'
-        content = '<pre>' + file_Path.file_Contents() + '</pre>'
-      else
-        content = marked(file_Path.file_Contents())
+      if file_Path.file_Contents()
+        if file_Name.file_Extension() is '.txt'
+          content = '<pre>' + file_Path.file_Contents() + '</pre>'
+        else
+          content = marked(file_Path.file_Contents())
 
       viewModel =
         title  : file_Name
