@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-docker run -it -d -p 80:80 -v $(pwd)/:/workspace/ kdelfour/cloud9-docker
