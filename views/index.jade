@@ -1,0 +1,37 @@
+html
+    head
+        title Practical Book
+        link(rel='stylesheet', href='/css/bootstrap.css')
+    style
+        | body { padding-top: 50px; }
+        | .sidebar { background-color: #f5f5f5;
+        |            position: fixed;
+        |            top: 51px;
+        |            bottom: 0;
+        |            left: 0;
+        |            display: block;
+        |            padding: 20px; }
+body
+    .navbar.navbar-inverse.navbar-fixed-top
+        .container-fluid
+            .navbar-header
+                a.navbar-brand(href="/") Practical Book
+
+    .container-fluid
+        .row
+            .col-md-5.sidebar
+                ul.nav.nav-sidebar
+                    for file in files
+                        if file
+                            li
+                                if (file === title)
+                                    b
+                                        a(href='/content' + file)= file.replace(/\//g, ' - ')
+                                else
+                                    div
+                                        a(href='/content' + file)= file.replace(/\//g, ' - ')
+        .row
+            .col-md-6.col-md-offset-6.main
+                h6.page-header= title
+                != content
+

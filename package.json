@@ -1,0 +1,20 @@
+{
+  "name": "editor-ui",
+  "version": "0.0.1",
+  "description": "editor ui for leanpub book content",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register --recursive -R list",
+    "test-watch": "node ./node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register --recursive -R list -w",
+    "local-server": "./node_modules/.bin/nodemon bin/Local-Server.coffee "
+  },
+  "author": "Dinis Cruz <dinis.cruz@owasp.org> (http://blog.diniscruz.com/)",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "coffee-script": "^1.10.0",
+    "fluentnode": "^0.5.5",
+    "marked": "^0.3.5"
+  }
+}
