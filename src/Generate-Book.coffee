@@ -20,7 +20,8 @@ class Generate_Book
       content_Files = @.folder_content.files_Recursive('.md')
       for file in content_Files
         file.file_Copy @.folder_manuscript
-      images_Files = @.folder_content.files_Recursive('.jpg').concat @.folder_content.files_Recursive('.png')
+      images_Files = @.folder_content.files_Recursive('.jpeg').concat(@.folder_content.files_Recursive('.jpg').concat(@.folder_content.files_Recursive('.png')))
+
       for file in images_Files
         file.file_Copy @.folder_images
 
