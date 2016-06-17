@@ -10,7 +10,9 @@
   },
   "author": "Dinis Cruz <dinis.cruz@owasp.org> (http://blog.diniscruz.com/)",
   "license": "ISC",
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^2.5.3"
+  },
   "dependencies": {
     "cheerio": "^0.19.0",
     "coffee-script": "^1.10.0",
