@@ -37,7 +37,7 @@ describe 'Local-Site', ->
             assert_Is_Null data
             done()
 
-  it 'should host content files', (done)->
+  xit 'should host content files', (done)->
     using local_Site, ->
       @.express_Setup()
       @.start()
