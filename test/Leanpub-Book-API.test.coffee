@@ -6,9 +6,10 @@ describe 'Leanpub_Book_API', ->
     using new Leanpub_Book_API(), ->
       @.book_Name         .assert_Is 'Book_Practical_AngularJS'
       @.target_Folder     .assert_Is @.root_Folder      .path_Combine 'book'
+      @.build_Folder      .assert_Is @.target_Folder    .path_Combine @.book_Name + "_Build"
       @.folder_Repo       .assert_Is @.target_Folder    .path_Combine @.book_Name
       @.folder_Content    .assert_Is @.folder_Repo      .path_Combine 'content'
-      @.folder_Manuscript .assert_Is @.target_Folder    .path_Combine 'manuscript'
+      @.folder_Manuscript .assert_Is @.build_Folder     .path_Combine 'manuscript'
       @.folder_Images     .assert_Is @.folder_Manuscript.path_Combine 'images'
       @.file_Book         .assert_Is @.folder_Manuscript.path_Combine 'Book.txt'
       @.url_Api_Preview   .assert_Is 'https://leanpub.com/{slug}/preview.json'

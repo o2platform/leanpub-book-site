@@ -7,4 +7,12 @@ before_script:
   - mkdir book
   - cd book
   - git clone https://github.com/DinisCruz/Book_Practical_AngularJS.git
+  - git clone https://github.com/DinisCruz-Dev/Book_Practical_AngularJS_Build.git
+  - ls -la
   - cd ..
+
+after_script:
+  - cd book
+  - ls -la
+  - cd Book_Practical_AngularJS_Build
+  - ls -la
