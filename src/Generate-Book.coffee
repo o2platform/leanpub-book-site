@@ -8,22 +8,23 @@ class Generate_Book
 
   clean_Manuscript: =>
     using @.leanpub_Api, ->
-      @.folder_manuscript.folder_Delete_Recursive()
-      @.folder_images.folder_Create()
+      console.log @.folder_Manuscript
+      @.folder_Manuscript.folder_Delete_Recursive()
+      @.folder_Images.folder_Create()
 
   create_File_Book: =>
     using @.leanpub_Api, ->
-      @.folder_content.path_Combine('Book.txt').file_Copy @.file_Book
+      @.folder_Content.path_Combine('Book.txt').file_Copy @.file_Book
 
   copy_Content_Files: =>
     using @.leanpub_Api, ->
-      content_Files = @.folder_content.files_Recursive('.md')
+      content_Files = @.folder_Content.files_Recursive('.md')
       for file in content_Files
-        file.file_Copy @.folder_manuscript
-      images_Files = @.folder_content.files_Recursive('.jpeg').concat(@.folder_content.files_Recursive('.jpg').concat(@.folder_content.files_Recursive('.png')))
+        file.file_Copy @.folder_Manuscript
+      images_Files = @.folder_Content.files_Recursive('.jpeg').concat(@.folder_Content.files_Recursive('.jpg').concat(@.folder_Content.files_Recursive('.png')))
 
       for file in images_Files
-        file.file_Copy @.folder_images
+        file.file_Copy @.folder_Images
 
   create_Preview: (slug, apikey, callback)=>
     url = @.leanpub_Api.url_Api_Preview.replace '{slug}', slug

@@ -8,8 +8,9 @@ describe 'Generate_Book', ->
 
   it 'clean_Manuscript', ->
     using new Generate_Book(), ->
+      
       @.clean_Manuscript()
-      @.leanpub_Api.folder_images.assert_Folder_Exists()
+      #@.leanpub_Api.folder_images.assert_Folder_Exists()
 
   it 'create_File_Book', ->
     using new Generate_Book(), ->
@@ -19,7 +20,7 @@ describe 'Generate_Book', ->
   it 'copy_Content_Files', ->
     using new Generate_Book(), ->
       @.copy_Content_Files()
-      @.leanpub_Api.folder_manuscript.files('.md').assert_Bigger_Than 6
+      @.leanpub_Api.folder_Manuscript.files('.md').assert_Bigger_Than 6
 
   xit 'create_Preview' , (done)->
     slug  = 'Practical_Jni4Net'

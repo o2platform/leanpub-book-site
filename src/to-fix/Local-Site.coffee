@@ -1,3 +1,4 @@
+return 
 require 'fluentnode'
 express = require 'express'
 cheerio = require 'cheerio'
@@ -14,23 +15,23 @@ class Local_Site
 
   express_Setup: =>
     @.app = new express()
-    @.app.use express.static @.leanpub_Api.folder_content
-    @.app.use '/css', express.static @.leanpub_Api.folder_repo + '/leanpub-book-site/bower_components/bootstrap/dist/css'
-    @.app.set 'views', @.leanpub_Api.folder_repo + '/leanpub-book-site/views'
+    @.app.use express.static @.leanpub_Api.folder_Content
+    @.app.use '/css', express.static @.leanpub_Api.folder_Repo + '/leanpub-book-site/bower_components/bootstrap/dist/css'
+    @.app.set 'views', @.leanpub_Api.folder_Repo + '/leanpub-book-site/views'
     @.app.set 'view engine', 'jade'
     @.map_Routes()
 
   map_Routes: =>
     render = (res, file_Name)=>
-      file_Path = @.leanpub_Api.folder_content + file_Name
+      file_Path = @.leanpub_Api.folder_Content + file_Name
       if file_Name.file_Extension() is '.jpg' or file_Name.file_Extension() is '.png'
         return res.sendFile file_Path.real_Path()
 
       files =
-        for file in @.leanpub_Api.folder_content.files_Recursive()
+        for file in @.leanpub_Api.folder_Content.files_Recursive()
           if file.file_Extension() and ['.jpg', '.png', '.DS_Store'].not_Contains file.file_Extension()
-            file.remove(@.leanpub_Api.folder_content.real_Path())
-
+            file.remove(@.leanpub_Api.folder_Content.real_Path())
+      console.log file_Path
       if file_Path.file_Contents()
         if file_Name.file_Extension() is '.txt'
           content = '<pre>' + file_Path.file_Contents() + '</pre>'

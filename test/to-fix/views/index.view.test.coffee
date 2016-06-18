@@ -1,3 +1,4 @@
+return 
 Local_Site = require '../../src/Local-Site'
 
 describe 'index (view)', ->
