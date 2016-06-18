@@ -14,7 +14,8 @@ class Create_Book_Txt
     book_Txt
 
   create: ()=>
-    book_Txt_Contents = @.build()
+    @.leanpub_Api.folder_Manuscript.folder_Create()
+    book_Txt_Contents = @.build()    
     book_Txt_Contents.save_As @.leanpub_Api.file_Book
     console.log @.leanpub_Api.file_Book.file_Exists()
 
