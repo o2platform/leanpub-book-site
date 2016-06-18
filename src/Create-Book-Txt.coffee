@@ -11,12 +11,15 @@ class Create_Book_Txt
     book_Txt = ""
     for part in @.get_Parts()
       book_Txt += "#{part}.md\n"
-    book_Txt
+      for section in @.get_Sections(part)
+        book_Txt += "#{section}.md\n"
+      book_Txt += '\n'
+    book_Txt 
 
   create: ()=>
     @.leanpub_Api.folder_Manuscript.folder_Create()
     book_Txt_Contents = @.build()    
-    book_Txt_Contents.save_As @.leanpub_Api.file_Book 
+    book_Txt_Contents.save_As @.leanpub_Api.file_Book
 
   get_Parts: ->
     @.folder_Content.folders().file_Names()

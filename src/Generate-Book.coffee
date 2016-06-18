@@ -11,7 +11,7 @@ class Generate_Book
   clean_Manuscript: =>
     using @.leanpub_Api, ->
       @.folder_Manuscript.folder_Delete_Recursive()
-      @.folder_Manuscript.folder_Create()
+      @.folder_Manuscript.folder_Create() 
       @.folder_Images.folder_Create()
 
   create_File_Book: =>
