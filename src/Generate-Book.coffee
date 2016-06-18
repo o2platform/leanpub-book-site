@@ -1,20 +1,24 @@
 require 'fluentnode'
 
 Leanpub_Book_API = require '../src/Leanpub-Book-API'
+Create_Book_Txt  = require '../src/Create-Book-Txt'
 
 class Generate_Book
   constructor: ->
-    @.leanpub_Api = new Leanpub_Book_API()
+    @.leanpub_Api     = new Leanpub_Book_API()
+    @.create_Book_Txt = new Create_Book_Txt()
 
   clean_Manuscript: =>
     using @.leanpub_Api, ->
-      console.log @.folder_Manuscript
       @.folder_Manuscript.folder_Delete_Recursive()
+      @.folder_Manuscript.folder_Create()
       @.folder_Images.folder_Create()
 
   create_File_Book: =>
-    using @.leanpub_Api, ->
-      @.folder_Content.path_Combine('Book.txt').file_Copy @.file_Book
+    if @.create_Book_Txt.original_File()
+      @.leanpub_Api.folder_Content.path_Combine('Book.txt').file_Copy @.file_Book
+    else
+      @.create_Book_Txt.create()
 
   copy_Content_Files: =>
     using @.leanpub_Api, ->

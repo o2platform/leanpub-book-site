@@ -1,6 +1,6 @@
 Create_Book_Txt = require '../src/Create-Book-Txt'
 
-describe 'Generate_Book', ->
+describe 'Create-Book-Txt', ->
 
   it 'ctor', ->
     using new Create_Book_Txt(), ->
@@ -12,13 +12,22 @@ describe 'Generate_Book', ->
   it 'build', ->
     using new Create_Book_Txt(), ->
       book_Txt = @.build()
-      console.log book_Txt.assert_Contains ['Frontmatter.md','Part-I', 'Part-II']
+      console.log book_Txt.assert_Contains ['1.Frontmatter.md','2.Part-I', '3.Part-II']
+
+  it 'create', ->
+    using new Create_Book_Txt(), ->
+      @.leanpub_Api.file_Book.file_Delete()
+      @.create()
+      @.leanpub_Api.file_Book.assert_File_Exists()
+
   it 'get_Parts', ->
     using new Create_Book_Txt(), ->
-      @.get_Parts().assert_Is [ 'Frontmatter', 'Part-I', 'Part-II' ]
+      @.get_Parts().assert_Is [ '1.Frontmatter', '2.Part-I', '3.Part-II' ]
     
   
   it 'original_File',->
     using new Create_Book_Txt(), ->
       @.original_File().assert_Is_False()
+      
+
 

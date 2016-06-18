@@ -13,6 +13,11 @@ class Create_Book_Txt
       book_Txt += "#{part}.md\n"
     book_Txt
 
+  create: ()=>
+    book_Txt_Contents = @.build()
+    book_Txt_Contents.save_As @.leanpub_Api.file_Book
+    console.log @.leanpub_Api.file_Book.file_Exists()
+
   get_Parts: ->
     @.folder_Content.folders().file_Names()
     
