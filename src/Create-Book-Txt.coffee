@@ -23,6 +23,11 @@ class Create_Book_Txt
     @.folder_Content.folders().file_Names()
     
   get_Sections: (part)->
+    part_Path = @.folder_Content.path_Combine part
+    sections = part_Path.folders().file_Names()
+    if sections.empty()
+      return part_Path.files().file_Names()
+    return sections
 
   get_Chapters: (section)->
     

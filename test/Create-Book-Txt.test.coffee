@@ -23,7 +23,12 @@ describe 'Create-Book-Txt', ->
   it 'get_Parts', ->
     using new Create_Book_Txt(), ->
       @.get_Parts().assert_Is [ '1.Frontmatter', '2.Part-I', '3.Part-II' ]
-    
+  
+  it 'get_Sections', ->
+    using new Create_Book_Txt(), ->
+      parts = @.get_Parts()
+      @.get_Sections(parts.first()).assert_Contains '2.Change-log.md'
+      @.get_Sections(parts.second()).assert_Contains '1.Introdution'
   
   it 'original_File',->
     using new Create_Book_Txt(), ->
