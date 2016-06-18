@@ -11,12 +11,21 @@ before_script:
   - mkdir book
   - cd book
   - git clone https://github.com/DinisCruz/Book_Practical_AngularJS.git
-  - git clone https://DinisCruz-DevAAA:$git_pwd@github.com/DinisCruz-Dev/Book_Practical_AngularJS_Build.git
+  - git clone https://DinisCruz-Dev:$git_pwd@github.com/DinisCruz-Dev/Book_Practical_AngularJS_Build.git
   - ls -la
   - cd ..
 
 after_script:
+  - export content_head=$(git rev-parse HEAD)
+  - echo $content_head
+  - echo ">>>>> Updating Build repo <<<<<"
+  - git config --global user.email "bot@travis.com"
+  - git config --global user.name "Travis Bot"
+
   - cd book
   - ls -la
   - cd Book_Practical_AngularJS_Build
+  - git diff
+  - git add -A
+  - git commit -m 'comming build changes for $content_head'
   - ls -la
