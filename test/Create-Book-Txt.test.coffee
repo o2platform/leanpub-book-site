@@ -27,10 +27,10 @@ describe 'Create-Book-Txt', ->
       @.create()
       @.leanpub_Api.file_Book.assert_File_Exists()
 
-  it 'get_Part_File_Name', ->
+  it 'fix_Md_Extension', ->
     using new Create_Book_Txt(), ->
-      @.get_Part_File_Name('2.Part-II'   ).assert_Is '2.Part-II.md'
-      @.get_Part_File_Name('2.Part-II.md').assert_Is '2.Part-II.md'
+      @.fix_Md_Extension('2.Part-II'   ).assert_Is '2.Part-II.md'
+      @.fix_Md_Extension('2.Part-II.md').assert_Is '2.Part-II.md'
 
   it 'get_Chapters', ->
     using new Create_Book_Txt(), ->

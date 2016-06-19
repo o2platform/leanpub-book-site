@@ -14,17 +14,17 @@ class Create_Book_Txt
       if part is '0.Frontmatter'
         book_Txt += '{frontmatter}\n\n'
         for section in @.get_Sections(part)
-          book_Txt += section + '\n'
+          book_Txt += @.fix_Md_Extension(section) + '\n'
         book_Txt += '\n{mainmatter}\n'
       else
         book_Txt += '\n--------------------------\n'
-        book_Txt += @.get_Part_File_Name(part) + '\n'
+        book_Txt += @.fix_Md_Extension(part) + '\n'
         book_Txt += '--------------------------\n'
         for section in @.get_Sections(part)
-          book_Txt += "\n\n#{section}\n\n"
+          book_Txt += "\n\n#{@.fix_Md_Extension(section)}\n\n"
           for chapter in @.get_Chapters(part, section)
             continue if chapter is 'images'
-            book_Txt += chapter + '\n'
+            book_Txt += @.fix_Md_Extension(chapter) + '\n'
       book_Txt += '\n'
 
       #console.log book_Txt
@@ -35,12 +35,10 @@ class Create_Book_Txt
     book_Txt_Contents = @.build()    
     book_Txt_Contents.save_As @.leanpub_Api.file_Book
 
-  get_Part_File_Name: (part)->
+  fix_Md_Extension: (part)->
     if part.file_Extension() is '.md'
       return part
     else
-      #index = part.split('.').first()
-      #file_Name = part.replace(index, '0')
       return part + '.md'
 
   get_Chapters: (part, section)->
