@@ -10,13 +10,24 @@ class Create_Book_Txt
   build: ()=>
     book_Txt = ""
     for part in @.get_Parts()
-      book_Txt += '--------------------------\n'
-      book_Txt += @.get_Part_File_Name(part) + '\n'
-      book_Txt += '--------------------------\n'
-      for section in @.get_Sections(part)
-        book_Txt += @.get_Part_File_Name(section) + '\n'
+      console.log part
+      if part is '1.Frontmatter'
+        book_Txt += '{frontmatter}\n\n'
+        for section in @.get_Sections(part)
+          book_Txt += section + '\n'
+        book_Txt += '{mainmatter}\n\n'
+      else
+        book_Txt += '--------------------------\n'
+        book_Txt += @.get_Part_File_Name(part) + '\n'
+        book_Txt += '--------------------------\n'
+        for section in @.get_Sections(part)
+          book_Txt += "\n\n#{section}\n\n"
+          for chapter in @.get_Chapters(part, section)
+            continue if chapter is 'images'
+            book_Txt += chapter + '\n'
       book_Txt += '\n'
-      console.log book_Txt
+
+      #console.log book_Txt
     book_Txt 
 
   create: ()=>
@@ -29,8 +40,14 @@ class Create_Book_Txt
       return part
     else
       index = part.split('.').first()
-      file_Name = part.replace(index, '0')          
+      file_Name = part.replace(index, '0')
       return file_Name + '.md'
+
+  get_Chapters: (part, section)->
+    section_Path = @.folder_Content.path_Combine part
+                                   .path_Combine section
+    chapters = section_Path.files().concat section_Path.folders()    
+    chapters.file_Names()
 
   get_Parts: ->
     @.folder_Content.folders().file_Names()
@@ -39,10 +56,9 @@ class Create_Book_Txt
     part_Path = @.folder_Content.path_Combine part
     sections = part_Path.folders().file_Names()
     if sections.empty()
-      return part_Path.files().file_Names()
-    return sections
-
-  get_Chapters: (section)->
+      part_Path.files().file_Names()
+    else
+      return sections
     
   mappings_For_Frontmatter: ->
     frontmatter_Folder = @.folder_Content.path_Combine 'Frontmatter'

@@ -12,11 +12,15 @@ describe 'Create-Book-Txt', ->
   it 'build', ->
     using new Create_Book_Txt(), ->
       book_Txt = @.build()
-      book_Txt.assert_Contains ['0.Frontmatter.md\n','0.Part-I.md\n', '0.Part-II.md\n']
-              .assert_Contains ['2.Change-log.md']
-              .assert_Contains ['0.Why-how-what.md\n']
-              .assert_Contains '--------------------------\n' 
-
+      console.log book_Txt
+      book_Txt.assert_Contains ['{frontmatter}', '{mainmatter}'
+                                '0.Part-I.md\n', '0.Part-II.md\n'
+                                '2.Change-log.md'
+                                '0.Why-how-what.md\n'
+                                '\n--------------------------\n']
+      
+      book_Txt.assert_Not_Contains ['images']
+      
   it 'create', ->
     using new Create_Book_Txt(), ->
       @.leanpub_Api.file_Book.file_Delete()
@@ -26,7 +30,13 @@ describe 'Create-Book-Txt', ->
   it 'get_Part_File_Name', ->
     using new Create_Book_Txt(), ->
       @.get_Part_File_Name('2.Part-II').assert_Is '0.Part-II.md'
-      
+
+  it 'get_Chapters', ->
+    using new Create_Book_Txt(), ->
+      part    = @.get_Parts().second()
+      section = @.get_Sections(part).first()
+      @.get_Chapters(part, section).assert_Contains ['0.Why-how-what.md', 'x.How-this-book-is-built.md', 'x.I-realy-like-angular-1x']
+
   it 'get_Parts', ->
     using new Create_Book_Txt(), ->
       @.get_Parts().assert_Is [ '1.Frontmatter', '2.Part-I', '3.Part-II' ]
