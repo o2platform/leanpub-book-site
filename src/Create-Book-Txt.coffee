@@ -10,16 +10,25 @@ class Create_Book_Txt
   build: ()=>
     book_Txt = ""
     for part in @.get_Parts()
-      book_Txt += "#{part}.md\n"
+      book_Txt += @.get_Part_File_Name(part) + '\n'
       for section in @.get_Sections(part)
-        book_Txt += "#{section}.md\n"
+        book_Txt += @.get_Part_File_Name(section) + '\n'
       book_Txt += '\n'
+      console.log book_Txt
     book_Txt 
 
   create: ()=>
     @.leanpub_Api.folder_Manuscript.folder_Create()
     book_Txt_Contents = @.build()    
     book_Txt_Contents.save_As @.leanpub_Api.file_Book
+
+  get_Part_File_Name: (part)->
+    index = part.split('.').first()
+    file_Name = part.replace(index, '0')
+    if file_Name.file_Extension() is '.md'
+      return file_Name
+    else
+      return file_Name + '.md'
 
   get_Parts: ->
     @.folder_Content.folders().file_Names()
