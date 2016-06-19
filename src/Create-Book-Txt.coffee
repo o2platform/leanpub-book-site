@@ -9,15 +9,14 @@ class Create_Book_Txt
 
   build: ()=>
     book_Txt = ""
-    for part in @.get_Parts()
-      console.log part
+    for part in @.get_Parts()      
       if part is '1.Frontmatter'
         book_Txt += '{frontmatter}\n\n'
         for section in @.get_Sections(part)
           book_Txt += section + '\n'
-        book_Txt += '{mainmatter}\n\n'
+        book_Txt += '\n{mainmatter}\n'
       else
-        book_Txt += '--------------------------\n'
+        book_Txt += '\n--------------------------\n'
         book_Txt += @.get_Part_File_Name(part) + '\n'
         book_Txt += '--------------------------\n'
         for section in @.get_Sections(part)
@@ -39,9 +38,9 @@ class Create_Book_Txt
     if part.file_Extension() is '.md'
       return part
     else
-      index = part.split('.').first()
-      file_Name = part.replace(index, '0')
-      return file_Name + '.md'
+      #index = part.split('.').first()
+      #file_Name = part.replace(index, '0')
+      return part + '.md'
 
   get_Chapters: (part, section)->
     section_Path = @.folder_Content.path_Combine part

@@ -14,13 +14,13 @@ describe 'Create-Book-Txt', ->
       book_Txt = @.build()
       console.log book_Txt
       book_Txt.assert_Contains ['{frontmatter}', '{mainmatter}'
-                                '0.Part-I.md\n', '0.Part-II.md\n'
+                                '2.Part-I.md\n', '3.Part-II.md\n'
                                 '2.Change-log.md'
                                 '0.Why-how-what.md\n'
                                 '\n--------------------------\n']
       
       book_Txt.assert_Not_Contains ['images']
-      
+
   it 'create', ->
     using new Create_Book_Txt(), ->
       @.leanpub_Api.file_Book.file_Delete()
