@@ -9,8 +9,9 @@ class Create_Book_Txt
 
   build: ()=>
     book_Txt = ""
-    for part in @.get_Parts()      
-      if part is '1.Frontmatter'
+    for part in @.get_Parts()
+      continue if part is '2.Part-II'       # todo : massive hack to remove Part II files (for now)
+      if part is '0.Frontmatter'
         book_Txt += '{frontmatter}\n\n'
         for section in @.get_Sections(part)
           book_Txt += section + '\n'

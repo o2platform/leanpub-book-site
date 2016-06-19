@@ -12,14 +12,14 @@ describe 'Create-Book-Txt', ->
   it 'build', ->
     using new Create_Book_Txt(), ->
       book_Txt = @.build()
-      console.log book_Txt
+      #console.log book_Txt
       book_Txt.assert_Contains ['{frontmatter}', '{mainmatter}'
-                                '2.Part-I.md\n', '3.Part-II.md\n'
+                                '1.Part-I.md\n',
                                 '2.Change-log.md'
                                 '0.Why-how-what.md\n'
                                 '\n--------------------------\n']
-      
-      book_Txt.assert_Not_Contains ['images']
+
+      book_Txt.assert_Not_Contains ['images', '2.Part-II.md\n']
 
   it 'create', ->
     using new Create_Book_Txt(), ->
@@ -29,7 +29,8 @@ describe 'Create-Book-Txt', ->
 
   it 'get_Part_File_Name', ->
     using new Create_Book_Txt(), ->
-      @.get_Part_File_Name('2.Part-II').assert_Is '0.Part-II.md'
+      @.get_Part_File_Name('2.Part-II'   ).assert_Is '2.Part-II.md'
+      @.get_Part_File_Name('2.Part-II.md').assert_Is '2.Part-II.md'
 
   it 'get_Chapters', ->
     using new Create_Book_Txt(), ->
@@ -39,7 +40,7 @@ describe 'Create-Book-Txt', ->
 
   it 'get_Parts', ->
     using new Create_Book_Txt(), ->
-      @.get_Parts().assert_Is [ '1.Frontmatter', '2.Part-I', '3.Part-II' ]
+      @.get_Parts().assert_Is [ '0.Frontmatter', '1.Part-I', '2.Part-II' ]
   
   it 'get_Sections', ->
     using new Create_Book_Txt(), ->
