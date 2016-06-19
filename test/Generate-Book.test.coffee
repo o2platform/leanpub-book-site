@@ -9,7 +9,7 @@ describe 'Generate_Book', ->
 
   it 'clean_Manuscript', ->
     using new Generate_Book(), ->      
-      @.clean_Manuscript() 
+      @.clean_Manuscript()  
       @.leanpub_Api.folder_Images.assert_Folder_Exists()
 
   it 'create_File_Book', ->

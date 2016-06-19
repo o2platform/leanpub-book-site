@@ -13,7 +13,9 @@ describe 'Create-Book-Txt', ->
     using new Create_Book_Txt(), ->
       book_Txt = @.build()
       book_Txt.assert_Contains ['0.Frontmatter.md\n','0.Part-I.md\n', '0.Part-II.md\n']
+              .assert_Contains ['2.Change-log.md']
               .assert_Contains ['0.Why-how-what.md\n']
+              .assert_Contains '--------------------------\n' 
 
   it 'create', ->
     using new Create_Book_Txt(), ->

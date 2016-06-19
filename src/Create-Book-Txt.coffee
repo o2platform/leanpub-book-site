@@ -10,7 +10,9 @@ class Create_Book_Txt
   build: ()=>
     book_Txt = ""
     for part in @.get_Parts()
+      book_Txt += '--------------------------\n'
       book_Txt += @.get_Part_File_Name(part) + '\n'
+      book_Txt += '--------------------------\n'
       for section in @.get_Sections(part)
         book_Txt += @.get_Part_File_Name(section) + '\n'
       book_Txt += '\n'
@@ -23,11 +25,11 @@ class Create_Book_Txt
     book_Txt_Contents.save_As @.leanpub_Api.file_Book
 
   get_Part_File_Name: (part)->
-    index = part.split('.').first()
-    file_Name = part.replace(index, '0')
-    if file_Name.file_Extension() is '.md'
-      return file_Name
+    if part.file_Extension() is '.md'
+      return part
     else
+      index = part.split('.').first()
+      file_Name = part.replace(index, '0')          
       return file_Name + '.md'
 
   get_Parts: ->
