@@ -3,8 +3,8 @@ require 'fluentnode'
 class Leanpub_Book_API
   constructor: (options)->
     @.options           = options
-    
-    @.book_Name         = 'Book_Practical_AngularJS'                          # this needs to be passed as parameter
+
+    @.book_Name         = 'Book_Jira_Risk_Workflow'                          # this needs to be passed as parameter
     @.root_Folder       = wallaby?.localProjectDir || __dirname.path_Combine '..'
     @.target_Folder     = @.root_Folder       .path_Combine 'book'
     @.build_Folder      = @.target_Folder     .path_Combine @.book_Name + "_Build"
